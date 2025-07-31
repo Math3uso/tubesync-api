@@ -1,4 +1,4 @@
-import { YTMedia } from "@/utils/get-playlist";
+import { YTMedia } from "@/repository/yt-repository";
 import { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 
@@ -9,7 +9,16 @@ export async function searchController(request: FastifyRequest, reply: FastifyRe
 
     const { name } = paramsSchama.parse(request.params);
 
-    const playlist = await YTMedia.getPlaylists({ name, maxResult: 2 });
+    const { videoInfo } = await YTMedia.getListVideos({ name });
 
-    return reply.status(200).send({ playlist });
+    const playList = await YTMedia.getPlaylists({ name, maxResult: 5 });
+
+    return reply.status(200).send({
+        videoInfo,
+        playList
+    });
+
+    // const playlist = await YTMedia.getPlaylists({ name, maxResult: 2 });
+
+    // return reply.status(200).send({ playlist });
 }

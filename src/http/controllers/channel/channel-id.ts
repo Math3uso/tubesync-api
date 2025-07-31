@@ -1,4 +1,4 @@
-import { YTMedia } from "@/utils/get-playlist";
+import { YTMedia } from "@/repository/yt-repository";
 import { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 
