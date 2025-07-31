@@ -1,7 +1,7 @@
 import { ChannelInfo, PlaylistInfo, VideoInfo } from '@/@types/medias';
 import { env } from '@/env';
 import axios from 'axios';
-import { MakeVideoInfo } from './make-videoInfo';
+import { MakeVideoInfo } from '../utils/make-videoInfo';
 
 export type GetPlayListRequest = {
     name: string;
@@ -62,18 +62,6 @@ export class YTMedia {
         );
 
         const videosData = await this.getVideosDetails(videoIds);
-
-        // const channelIds = videosData.map((v: any) => v.snippet.channelId);
-        // const channelsData = await this.getChannelsDetails(channelIds);
-
-        // const channelMap: Record<string, ChannelInfo> = {};
-        // channelsData.forEach((channel: any) => {
-        //     channelMap[channel.id] = {
-        //         id: channel.id,
-        //         name: channel.snippet.title,
-        //         image: channel.snippet.thumbnails.default.url,
-        //     };
-        // });
 
         return videosData.map((video: any): VideoInfo => {
             const channelId = video.snippet.channelId;
