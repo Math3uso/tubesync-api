@@ -11,7 +11,7 @@ export async function searchController(request: FastifyRequest, reply: FastifyRe
 
     const { videoInfo } = await YTMedia.getListVideos({ name });
 
-    const playList = await YTMedia.getPlaylists({ name, maxResult: 5 });
+    const playList = await YTMedia.getPlaylists({ name, maxResult: 3 });
 
     return reply.status(200).send({
         videoInfo,
