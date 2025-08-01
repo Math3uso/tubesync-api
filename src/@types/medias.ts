@@ -13,7 +13,7 @@ export type ChannelInfo = {
 export type VideoInfo = {
     id: string;
     title: string;
-    description: string;
+    description?: string;
     thumbnail: string;
     publishedAt: string;
     duration: string;

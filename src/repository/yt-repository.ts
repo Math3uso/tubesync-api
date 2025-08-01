@@ -68,7 +68,7 @@ export class YTMedia {
             return {
                 id: video.id,
                 title: video.snippet.title,
-                description: video.snippet.description,
+                //description: video.snippet.description,
                 thumbnail: video.snippet.thumbnails?.high?.url || '',
                 thumbDefault: video.snippet.thumbnails.default.url,
                 publishedAt: video.snippet.publishedAt,
@@ -88,7 +88,7 @@ export class YTMedia {
                 part: 'snippet',
                 q: name,
                 type: 'video',
-                maxResults: 20,
+                maxResults: maxResult,
                 key: env.YOUTUBE_API_KEY,
             }
         });
