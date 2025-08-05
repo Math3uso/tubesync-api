@@ -17,7 +17,11 @@ export async function auth(request: FastifyRequest, reply: FastifyReply) {
 
     try {
 
-        const { user } = await authService.execute({ email, password, refrash_token: "" });
+        const { user, refreshToken } = await authService.execute({
+            email,
+            password,
+            generateToken: (payload) => reply.jwtSign(payload, { sign: { expiresIn: '10d' } })
+        });
 
         const token = await reply.jwtSign({ sub: user.id }, {
             sign: {
@@ -25,16 +29,8 @@ export async function auth(request: FastifyRequest, reply: FastifyReply) {
             }
         });
 
-
-        const refrashToken = await reply.jwtSign({}, {
-            sign: {
-                sub: user.id,
-                expiresIn: '10d'
-            }
-        });
-
         return reply
-            .setCookie('refreshToken', refrashToken, {
+            .setCookie('refreshToken', refreshToken, {
                 path: '/',
                 secure: env.NODE_ENV == 'prod' ? true : false,
                 httpOnly: true,
@@ -43,8 +39,10 @@ export async function auth(request: FastifyRequest, reply: FastifyReply) {
             .status(200).send({ token });
 
     } catch (error) {
-        if (error instanceof UserIsNoteFoundError || error instanceof InvalidCredentialsError) {
+        if (error instanceof InvalidCredentialsError) {
             return reply.status(400).send({ message: error.message });
+        } else if (error instanceof UserIsNoteFoundError) {
+            return reply.status(404).send({ message: error.message });
         }
 
         throw error;

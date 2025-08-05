@@ -7,7 +7,8 @@
     "build": "tsup src --out-dir build",
     "start": "node build/server.js",
     "test": "vitest run --project unit",
-    "test:watch": "vitest --project unit"
+    "test:watch": "vitest --project unit",
+    "test:e2e": "vitest run --project e2e"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,8 @@
     "tsup": "^8.5.0",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
+    "vite": "6.3.5",
+    "vite-tsconfig-paths": "5.1.4",
     "vitest": "^3.2.4"
   },
   "dependencies": {
@@ -27,6 +30,7 @@
     "@fastify/cors": "^11.0.1",
     "@fastify/jwt": "^9.1.0",
     "@prisma/client": "^6.13.0",
+    "@types/supertest": "^6.0.3",
     "axios": "^1.10.0",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
@@ -36,7 +40,7 @@
     "fastify-jwt": "^4.1.3",
     "play-dl": "^1.9.7",
     "prisma": "^6.13.0",
-    "vite-tsconfig-paths": "^5.1.4",
+    "supertest": "^7.1.4",
     "youtube-search-api": "^2.0.0",
     "ytsr": "^3.8.4",
     "zod": "^3.25.74"
