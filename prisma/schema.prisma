@@ -15,13 +15,22 @@ datasource db {
 }
 
 model User {
-  id            String   @id @unique @default(uuid())
+  id            String         @id @unique @default(uuid())
   name          String
-  email         String   @unique
+  email         String         @unique
   password_hash String
   //access_token  String
-  refrash_token String?
-  created_at    DateTime @default(now())
+  created_at    DateTime       @default(now())
+  refreshToken  RefreshToken[]
 
   @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  token     String   @unique
+  createdAt DateTime @default(now())
+  expiresAt DateTime
 }
