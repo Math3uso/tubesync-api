@@ -29,6 +29,10 @@ app.register(fastifySwagger, {
             description: 'Documentação automática via Fastify',
             version: '1.0.0'
         },
+        host: 'localhost:3001',
+        schemes: ['http'],
+        consumes: ['application/json'],
+        produces: ['application/json'],
         securityDefinitions: {
             cookieAuth: {
                 type: 'apiKey',

@@ -111,6 +111,7 @@ export async function userRoutes(app: FastifyInstance) {
     app.get('/user/profile', {
         preHandler: verifyJwt,
         schema: {
+            summary: 'Busca os dados do usuário autenticado',
             description: 'Retorna os dados do usuário autenticado',
             tags: ['Users'],
             security: [{ cookieAuth: [] }],

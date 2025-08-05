@@ -26,8 +26,5 @@ export async function playController(request: FastifyRequest, reply: FastifyRepl
 
     return reply.status(200).send({
         mediaUrl: format?.url,
-        videos: []
     });
-
-    // return reply.status(200).send(format?.url);
 }
