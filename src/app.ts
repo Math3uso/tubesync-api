@@ -6,6 +6,8 @@ import { env } from "./env";
 import cors from "@fastify/cors";
 import fastifyCookie from "@fastify/cookie";
 import { userRoutes } from "./http/controllers/user/routes";
+import fastifySwagger from '@fastify/swagger'
+import fastifySwaggerUI from '@fastify/swagger-ui'
 
 export const app = fastify();
 
@@ -20,6 +22,27 @@ app.register(fastifyJwt, {
     }
 });
 
+app.register(fastifySwagger, {
+    swagger: {
+        info: {
+            title: 'Minha API',
+            description: 'Documentação automática via Fastify',
+            version: '1.0.0'
+        },
+        securityDefinitions: {
+            cookieAuth: {
+                type: 'apiKey',
+                in: 'cookie',
+                name: 'refreshToken',
+            },
+        },
+    }
+});
+
+app.register(fastifySwaggerUI, {
+    routePrefix: '/docs'
+})
+
 app.register(fastifyCookie)
 
 app.register(appRoutes);
@@ -29,6 +52,7 @@ app.register(cors, {
     origin: env.NODE_ENV === "dev" ? "*" : "definir url",
     methods: ["GET", "POST", "PUT", "DELETE"],
 });
+
 
 app.setErrorHandler((error, _, reply) => {
     if (error instanceof ZodError) {
