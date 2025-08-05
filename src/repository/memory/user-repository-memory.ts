@@ -1,6 +1,6 @@
 import { Prisma, User } from "@prisma/client";
-import { IUserRepository } from "../user/i-user-repository";
 import { randomUUID } from "crypto";
+import { IUserRepository } from "../user/i-user-repository";
 
 export class UserRepositoryInMemory implements IUserRepository {
 
@@ -14,7 +14,6 @@ export class UserRepositoryInMemory implements IUserRepository {
             email: data.email,
             created_at: new Date(),
             password_hash: data.password_hash,
-            refrash_token: null
         }
 
         this.users.push(newUser);
@@ -39,12 +38,5 @@ export class UserRepositoryInMemory implements IUserRepository {
 
         return user;
 
-    }
-    async setRefrashToken(userId: string, token: string): Promise<User | null> {
-        const user = this.users.find(el => el.id == userId) as User;
-
-        user.refrash_token = token;
-
-        return user;
     }
 }
