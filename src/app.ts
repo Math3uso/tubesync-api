@@ -25,7 +25,7 @@ app.register(fastifyJwt, {
 app.register(fastifySwagger, {
     swagger: {
         info: {
-            title: 'Minha API',
+            title: 'YouTube Audio API',
             description: 'Documentação automática via Fastify',
             version: '1.0.0'
         },
