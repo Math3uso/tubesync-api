@@ -11,6 +11,16 @@ export async function appRoutes(app: FastifyInstance) {
         onRequest: [verifyJwt],
         schema: {
             tags: ["search"],
+            querystring: {
+                type: "object",
+                properties: {
+                    name: {
+                        type: "string",
+                        description: "nome da música/video",
+                    },
+                },
+                required: ["name"],
+            },
             description: "Retorna lista de videos e 3 playlist (aproximadamente 15-20 videos em cada playlist)"
         }
     }, searchController,);
@@ -66,6 +76,16 @@ export async function appRoutes(app: FastifyInstance) {
         onRequest: [verifyJwt],
         schema: {
             tags: ["channels"],
+            querystring: {
+                type: "object",
+                properties: {
+                    id: {
+                        type: "string",
+                        description: "id do canal",
+                    },
+                },
+                required: ["id"],
+            },
             description: "Busca dados de um canal do YouTube pelo id"
         }
     }, channeIdlController,);
