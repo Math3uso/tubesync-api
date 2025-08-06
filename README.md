@@ -32,7 +32,7 @@ Uma API RESTful para busca e streaming de conteúdo do YouTube, com foco em mús
 ```bash
 
 # Clone o repositório
-git clone https://github.com/Math3uso/tubesync-api.
+git clone https://github.com/Math3uso/tubesync-api.git
 cd tubesync-api
 
 # Instale as dependências
