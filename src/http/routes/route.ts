@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { searchController } from "@/http/controllers/search/search"
 import { playController } from "../controllers/play/play";
-import { channeIdlController } from "../controllers/channel/channel-id";
+import { channeIdlController } from "../controllers/chennel/channel-id";
 import { verifyJwt } from "../middlewares/verify-jwt";
 
 
