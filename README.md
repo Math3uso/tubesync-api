@@ -53,7 +53,7 @@ npm run dev
 
 ```
 
-### Certifique-se que tenha um .env na raiz do projeto, com um conteudo parecido com isso:
+### Certifique-se de que exista um arquivo .env na raiz do projeto com um conteúdo semelhante a este:
 
 ```bash
 
@@ -69,6 +69,33 @@ DATABASE_URL="postgresql://docker:docker@localhost:5432/search-yt?schema=public"
 ## 📖 Endpoints Principais
 
 ### 🔍 Busca
-- `GET /search/name...` - Busca vídeos/músicas
-- `GET /search/channel?query=termo` - Busca canais (Pelo id)
-- 
+- `GET /search?name=video_name` - Busca vídeos/músicas
+- `GET /search/channel?id=id` - Busca canais (Pelo id)
+
+### 🎵 Reprodução
+- `GET /play?id=video_id` - Obtém URL de streaming
+
+### 🔐 Autenticação
+- `GET /user/register` - Registro de usuário
+- `GET /user/auth` - Login
+- `GET /user/refrash` - Renovar token
+- `GET /user/profile` - Perfil
+
+## 📚 Documentação
+Acesse a documentação interativa do Swagger em:
+```bash
+http://localhost:3001/docs
+```
+
+## 🧪 Testes
+A aplicação possui cobertura completa de testes unitários e end-to-end.
+
+### Executar Testes
+```bash
+# Testes unitarios unitarios
+npm run test:unit
+
+# Apenas testes E2E
+npm run test:e2e
+
+```
