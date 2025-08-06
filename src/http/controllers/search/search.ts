@@ -3,11 +3,11 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 
 export async function searchController(request: FastifyRequest, reply: FastifyReply) {
-    const paramsSchama = z.object({
+    const querySchema = z.object({
         name: z.string().nonempty()
     });
 
-    const { name } = paramsSchama.parse(request.params);
+    const { name } = querySchema.parse(request.query);
 
     const { videoInfo } = await YTMedia.getListVideos({ name });
 

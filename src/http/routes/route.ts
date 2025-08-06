@@ -7,7 +7,7 @@ import { verifyJwt } from "../middlewares/verify-jwt";
 
 export async function appRoutes(app: FastifyInstance) {
 
-    app.get('/search/:name', {
+    app.get('/search', {
         onRequest: [verifyJwt],
         schema: {
             tags: ["search"],
