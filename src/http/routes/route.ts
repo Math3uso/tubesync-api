@@ -62,7 +62,7 @@ export async function appRoutes(app: FastifyInstance) {
         playController
     );
 
-    app.get("/chennel/:id", {
+    app.get("/chennel", {
         onRequest: [verifyJwt],
         schema: {
             tags: ["channels"],

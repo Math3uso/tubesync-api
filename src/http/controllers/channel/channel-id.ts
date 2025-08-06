@@ -3,11 +3,11 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 
 export async function channeIdlController(request: FastifyRequest, reply: FastifyReply) {
-    const paramsSchama = z.object({
+    const querySchema = z.object({
         id: z.string().nonempty()
     });
 
-    const { id } = paramsSchama.parse(request.params);
+    const { id } = querySchema.parse(request.query);
 
     // const playlist = await YTMedia.getPlaylists({ name, maxResult: 2 });
 
