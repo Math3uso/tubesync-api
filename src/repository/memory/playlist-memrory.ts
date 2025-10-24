@@ -14,6 +14,7 @@ export class PlayListInMemory implements IPlaylist {
             userId: userId as string,
             title,
             description: description as string,
+            imageUrl: null
         }
 
         this.playlist.push(newPlaylist);
@@ -35,6 +36,5 @@ export class PlayListInMemory implements IPlaylist {
     async findMediaFilesById(id: string): Promise<MediaFile[]> {
         throw new Error("Method not implemented.");
     }
-
 
 }

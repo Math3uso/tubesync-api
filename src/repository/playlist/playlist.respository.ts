@@ -19,14 +19,4 @@ export class PlayListRepository implements IPlaylist {
     async findMediaFilesById(id: string): Promise<MediaFile[]> {
         throw new Error("Method not implemented.");
     }
-
-    async addMediaFile(id: string, mediaFileId: string): Promise<MediaFile> {
-        return await prisma.mediaFile.update({
-            where: { id: mediaFileId },
-            data: {
-                playlistId: id
-            }
-        })
-    }
-
 }
