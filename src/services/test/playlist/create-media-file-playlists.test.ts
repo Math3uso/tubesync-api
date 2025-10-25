@@ -20,7 +20,7 @@ let sut: CreateMediaFilePlaylistService;
 
 
 
-describe('Register Service', async () => {
+describe('createMediaFile Service', async () => {
 
     beforeEach(() => {
         playlistRepository = new PlayListInMemory();
