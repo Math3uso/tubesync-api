@@ -23,6 +23,7 @@ model User {
   created_at    DateTime       @default(now())
   refreshToken  RefreshToken[]
 
+  playlists Playlist[]
   mediaFile MediaFile[]
 
   @@map("users")
@@ -53,6 +54,9 @@ model Playlist {
   id          String  @id @default(uuid())
   title       String
   description String?
+  imageUrl    String?
 
   mediaFile MediaFile[]
+  User      User?       @relation(fields: [userId], references: [id])
+  userId    String?
 }

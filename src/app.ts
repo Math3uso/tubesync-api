@@ -8,6 +8,7 @@ import fastifyCookie from "@fastify/cookie";
 import { userRoutes } from "./http/controllers/user/routes";
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUI from '@fastify/swagger-ui'
+import { HttpExeption } from "./@exceptions/exeption";
 
 export const app = fastify();
 
@@ -47,6 +48,7 @@ app.register(fastifySwaggerUI, {
     routePrefix: '/docs'
 })
 
+
 app.register(fastifyCookie)
 
 app.register(appRoutes);
@@ -59,8 +61,13 @@ app.register(cors, {
 
 
 app.setErrorHandler((error, _, reply) => {
+
     if (error instanceof ZodError) {
         return reply.status(400).send({ message: "Validation error.", issues: error.format() })
+    }
+
+    if (error instanceof HttpExeption) {
+        return reply.status(error.statusCode).send({ message: error.message });
     }
 
     if (env.NODE_ENV == "dev") {

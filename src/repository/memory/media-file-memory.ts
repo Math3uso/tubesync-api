@@ -28,9 +28,11 @@ export class MediaFileRepositoryInMemory implements IMediaFileRepository {
         return mediaFile;
     }
 
-    async addToPlaylist(id: string, playlistId: string): Promise<MediaFile | null> {
+    async addToPlaylist({ id, playlistId }: { id: string, playlistId: string }): Promise<MediaFile | null> {
         const mediaFile = this.mediaFiles.find(el => el.id == id);
-        if (!mediaFile) return null;
+        if (!mediaFile) {
+            return null
+        };
         mediaFile.playlistId = playlistId;
         return mediaFile;
     }

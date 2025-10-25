@@ -12,7 +12,10 @@ export async function searchControllerV2(request: FastifyRequest, reply: Fastify
 
     try {
 
-        const { name } = paramsSchama.parse(request.params);
+        const { name } = paramsSchama.parse(request.query);
+
+        console.log(name);
+
         const results = await GetListByKeyword(name, false, 10);
 
         const videos: VideoInfo[] = [];
