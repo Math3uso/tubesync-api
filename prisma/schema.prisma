@@ -25,8 +25,20 @@ model User {
 
   playlists Playlist[]
   mediaFile MediaFile[]
+  Session   Session[]
 
   @@map("users")
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  userAgent    String?
+  refrashToken String   @unique
+  ip           String?
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  createdAt    DateTime @default(now())
+  expiresAt    DateTime
 }
 
 model RefreshToken {
