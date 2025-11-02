@@ -1,4 +1,3 @@
-import { env } from "@/env";
 import { InvalidCredentialsError } from "@/services/errors/invalid-credentials-error";
 import { UserIsNoteFoundError } from "@/services/errors/user-is-not-found-error";
 import { MakeAuthenticateService } from "@/services/factory/make-authenticate-service";
@@ -20,7 +19,7 @@ export async function auth(request: FastifyRequest, reply: FastifyReply) {
         const { user, refreshToken } = await authService.execute({
             email,
             password,
-            generateToken: (payload) => reply.jwtSign(payload, { sign: { expiresIn: '10d' } })
+            generateToken: (payload) => reply.jwtSign(payload, { sign: { expiresIn: '20d' } })
         });
 
         const token = await reply.jwtSign({ sub: user.id }, {
@@ -29,14 +28,7 @@ export async function auth(request: FastifyRequest, reply: FastifyReply) {
             }
         });
 
-        return reply
-            .setCookie('refreshToken', refreshToken, {
-                path: '/',
-                secure: env.NODE_ENV == 'prod' ? true : false,
-                httpOnly: true,
-                sameSite: true
-            })
-            .status(200).send({ token });
+        return reply.status(200).send({ token, refreshToken });
 
     } catch (error) {
         if (error instanceof InvalidCredentialsError) {

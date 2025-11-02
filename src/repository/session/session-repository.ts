@@ -1,16 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { ISessionRepository } from "./i-session.repository";
-import { Session } from "@prisma/client";
+import { Prisma, Session } from "@prisma/client";
 
 export class SessionRepository implements ISessionRepository {
-    async create(data: { token: string; userId: string; expiresAt: Date; }): Promise<Session> {
-        return await prisma.session.create({
-            data: {
-                refrashToken: data.token,
-                userId: data.userId,
-                expiresAt: data.expiresAt
-            }
-        });
+    async create(data: Prisma.SessionUncheckedCreateInput): Promise<Session> {
+        return await prisma.session.create({ data });
     }
     async findByToken(token: string): Promise<Session | null> {
         return await prisma.session.findUnique({

@@ -1,6 +1,7 @@
 import { app } from "@/app";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import request from "supertest";
+import { refrash } from "../refrash";
 
 describe("Auth (E2E)", () => {
 
@@ -29,7 +30,8 @@ describe("Auth (E2E)", () => {
 
         expect(res.statusCode).toEqual(200);
         expect(res.body).toEqual({
-            token: expect.any(String)
+            token: expect.any(String),
+            refreshToken: expect.any(String)
         });
     });
 });

@@ -2,7 +2,6 @@ import { UserRepository } from "@/repository/user/user-repository";
 import { UserIsNoteFoundError } from "../errors/user-is-not-found-error";
 import { compare } from "bcryptjs";
 import { InvalidCredentialsError } from "../errors/invalid-credentials-error";
-import { RefrashTokenRepository } from "@/repository/refresh-token/refresh-token-repository";
 import { ISessionRepository } from "@/repository/session/i-session.repository";
 
 interface AuthenticateServiceRequest {
@@ -33,7 +32,7 @@ export class AuthenticateService {
         await this.sessionRepository.create({
             refrashToken: refreshToken,
             userId: user.id,
-            expiresAt: new Date((now.getDate() + 20))
+            expiresAt: new Date((now.getDate() + 20)),
         });
 
         return {

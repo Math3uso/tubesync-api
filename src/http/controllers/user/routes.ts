@@ -57,6 +57,7 @@ export async function userRoutes(app: FastifyInstance) {
                     type: 'object',
                     properties: {
                         token: { type: 'string', description: 'JWT de acesso com validade curta (ex: 10 minutos)' },
+                        refreshToken: { type: 'string', description: 'Refresh token com validade longa (ex: 20 dias)' },
                     },
                 },
                 400: {
