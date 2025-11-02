@@ -1,13 +1,17 @@
 import { UserRepositoryInMemory } from "../../repository/memory/user-repository-memory";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { AuthenticateService } from "../authenticate";
+import { AuthenticateService } from "../user/authenticate";
 import { hash } from "bcryptjs";
 import { InvalidCredentialsError } from "../errors/invalid-credentials-error";
 import { UserIsNoteFoundError } from "../errors/user-is-not-found-error";
 import { RefreshTokenRepositoryInMemory } from "../../repository/memory/refresh-token-memory";
+import { ISessionRepository } from "@/repository/session/i-session.repository";
+import { Session } from "inspector/promises";
+import { SessionRepositoryInMemory } from "@/repository/memory/session-repository-in-memory";
 
 let userRepository: UserRepositoryInMemory;
-let refrashTokenRepository: RefreshTokenRepositoryInMemory;
+// let refrashTokenRepository: RefreshTokenRepositoryInMemory;
+let sessionRepository: ISessionRepository;
 let sut: AuthenticateService;
 
 
@@ -15,8 +19,9 @@ describe('Register Service', async () => {
 
     beforeEach(() => {
         userRepository = new UserRepositoryInMemory();
-        refrashTokenRepository = new RefreshTokenRepositoryInMemory();
-        sut = new AuthenticateService(userRepository, refrashTokenRepository);
+        //  refrashTokenRepository = new RefreshTokenRepositoryInMemory();
+        sessionRepository = new SessionRepositoryInMemory();
+        sut = new AuthenticateService(userRepository, sessionRepository);
     });
 
     it('should be able to authenticate', async () => {

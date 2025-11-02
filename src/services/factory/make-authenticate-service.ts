@@ -1,5 +1,5 @@
 import { UserRepository } from "@/repository/user/user-repository"
-import { AuthenticateService } from "../authenticate";
+import { AuthenticateService } from "../user/authenticate";
 import { RefrashTokenRepository } from "@/repository/refresh-token/refresh-token-repository";
 
 export const MakeAuthenticateService = () => {

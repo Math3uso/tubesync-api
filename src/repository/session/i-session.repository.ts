@@ -1,7 +1,7 @@
-import { Session } from "@prisma/client";
+import { Prisma, Session } from "@prisma/client";
 
 export interface ISessionRepository {
-    create(data: { token: string; userId: string; expiresAt: Date }): Promise<Session>;
+    create(data: Prisma.SessionUncheckedCreateInput): Promise<Session>;
     findByToken(token: string): Promise<Session | null>;
-    deleteByToken(token: string): Promise<Session>;
+    deleteByToken(token: string): Promise<Session | null>;
 }
