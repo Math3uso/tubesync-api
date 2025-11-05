@@ -32,4 +32,11 @@ export class SessionRepositoryInMemory implements ISessionRepository {
         this.sessions = this.sessions.filter(session => session.refrashToken !== token);
         return index;
     }
+
+    async update(session: Session): Promise<Session | null> {
+        const index = this.sessions.findIndex(s => s.id === session.id);
+        if (index === -1) return null;
+        this.sessions[index] = session;
+        return session;
+    }
 }
