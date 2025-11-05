@@ -1,3 +1,4 @@
+import { NotFoundExeption } from "@/@exceptions/default/not-found.exeption";
 import { ISessionRepository } from "@/repository/session/i-session.repository";
 
 interface UpdateSessionServiceRequest {
@@ -11,7 +12,7 @@ export class UpdateSessionService {
     async execute({ token, newToken }: UpdateSessionServiceRequest) {
         const session = await this.sessionRepository.findByToken(token);
 
-        if (!session) throw new Error('Session not found');
+        if (!session) throw new NotFoundExeption('Session not found');
 
         session.refrashToken = newToken;
 
