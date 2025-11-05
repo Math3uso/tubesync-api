@@ -28,4 +28,11 @@ describe('Update Session', async () => {
         expect(updatedSession.refrashToken).toEqual('new-token');
     });
 
+
+    it("should not be able to update a session that doesn't exist", async () => {
+        await expect(() =>
+            sut.execute({ token: 'non-existent-token', newToken: 'new-token' })
+        ).rejects.toThrowError('Session not found');
+    });
+
 });
