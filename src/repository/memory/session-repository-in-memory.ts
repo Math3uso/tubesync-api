@@ -12,7 +12,7 @@ export class SessionRepositoryInMemory implements ISessionRepository {
             id: randomUUID(),
             createdAt: new Date(),
             expiresAt: new Date((now.getDate() + 10)),
-            refrashToken: "token",
+            refrashToken: data.refrashToken,
             userId: data.userId,
             ip: "",
             userAgent: ""
