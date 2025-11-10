@@ -1,7 +1,7 @@
 import { app } from "@/app";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import request from "supertest";
-import { refrash } from "../refrash";
+import { refrash } from "../refresh";
 
 describe("Auth (E2E)", () => {
 
