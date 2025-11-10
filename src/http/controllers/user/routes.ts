@@ -3,7 +3,7 @@ import { register } from "./register";
 import { auth } from "./auth";
 import { verifyJwt } from "@/http/middlewares/verify-jwt";
 import { profile } from "./profile";
-import { refrash } from "./refrash";
+import { refrash } from "./refresh";
 
 
 export async function userRoutes(app: FastifyInstance) {
@@ -79,7 +79,7 @@ export async function userRoutes(app: FastifyInstance) {
         handler: auth,
     });
 
-    app.get('/user/refrash', {
+    app.post('/user/refrash', {
         schema: {
             tags: ['Users'],
             summary: 'Renovar token de acesso via refresh token (cookie)',
@@ -95,6 +95,7 @@ export async function userRoutes(app: FastifyInstance) {
                     type: 'object',
                     properties: {
                         token: { type: 'string', description: 'Novo token JWT de acesso' },
+                        refreshToken: { type: 'string', description: 'Novo token JWT de refresh' }
                     },
                 },
                 401: {
