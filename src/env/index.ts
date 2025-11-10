@@ -6,7 +6,8 @@ const envSchema = z.object({
     PORT: z.coerce.number().default(3001),
     YOUTUBE_API_KEY: z.string(),
     JWT_SECRET: z.string(),
-    DATABASE_URL: z.string()
+    DATABASE_URL: z.string(),
+    READ_ONLY: z.string().default("true")
 });
 
 const _env = envSchema.safeParse(process.env);
