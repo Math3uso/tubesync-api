@@ -37,4 +37,9 @@ export class MediaFileRepositoryInMemory implements IMediaFileRepository {
         return mediaFile;
     }
 
+    async findAllByPlaylistId(playlistId: string): Promise<MediaFile[]> {
+        const data = this.mediaFiles.filter(el => el.playlistId === playlistId);
+        return data;
+    }
+
 }
