@@ -9,6 +9,9 @@ import { userRoutes } from "./http/controllers/user/routes";
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUI from '@fastify/swagger-ui'
 import { HttpExeption } from "./@exceptions/exeption";
+import { playlistRoutes } from "./http/controllers/playlist/routes";
+import "@/core/security/file-protection"
+import { mediaFileRoutes } from "./http/controllers/media-file/routes";
 
 export const app = fastify();
 
@@ -53,6 +56,8 @@ app.register(fastifyCookie)
 
 app.register(appRoutes);
 app.register(userRoutes);
+app.register(playlistRoutes);
+app.register(mediaFileRoutes);
 
 app.register(cors, {
     origin: env.NODE_ENV === "dev" ? "*" : "definir url",
@@ -70,7 +75,7 @@ app.setErrorHandler((error, _, reply) => {
         return reply.status(error.statusCode).send({ message: error.message });
     }
 
-    if (env.NODE_ENV == "dev") {
+    if (env.NODE_ENV == "dev" || env.NODE_ENV == "test") {
         console.log(error);
     }
 
