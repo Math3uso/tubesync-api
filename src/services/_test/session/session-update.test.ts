@@ -3,7 +3,7 @@ import { UserRepositoryInMemory } from "@/repository/memory/user-repository-memo
 import { ProfileService } from "@/services/profile";
 import { UpdateSessionService } from "@/services/session/update-session-service";
 import { hash } from "bcryptjs";
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 let sessionRepository: SessionRepositoryInMemory;
 let sut: UpdateSessionService;
@@ -23,15 +23,20 @@ describe('Update Session', async () => {
             expiresAt: new Date(),
         });
 
-        const { session: updatedSession } = await sut.execute({ token: 'old-token', newToken: 'new-token' });
+        const fakeGenerateToken = vi.fn().mockResolvedValue('new-token');
+
+        const { session: updatedSession } = await sut.execute({ token: 'old-token', generateToken: fakeGenerateToken });
 
         expect(updatedSession.refrashToken).toEqual('new-token');
     });
 
 
     it("should not be able to update a session that doesn't exist", async () => {
+
+        const fakeGenerateToken = vi.fn().mockResolvedValue('new-token');
+
         await expect(() =>
-            sut.execute({ token: 'non-existent-token', newToken: 'new-token' })
+            sut.execute({ token: 'non-existent-token', generateToken: fakeGenerateToken })
         ).rejects.toThrowError('Session not found');
     });
 
