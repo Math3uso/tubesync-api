@@ -17,6 +17,8 @@ export class PlayListRepository implements IPlaylist {
         });
     }
     async findMediaFilesById(id: string): Promise<MediaFile[]> {
-        throw new Error("Method not implemented.");
+        return await prisma.mediaFile.findMany({
+            where: { playlistId: id }
+        });
     }
 }
