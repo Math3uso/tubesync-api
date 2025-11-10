@@ -4,7 +4,7 @@ import request from "supertest";
 
 export async function createAndAuthenticateTest(app: FastifyInstance) {
 
-    await request(app.server).post('/user/register')
+    const user = await request(app.server).post('/user/register')
         .send({
             name: "teste",
             email: "teste@teste.com",
@@ -19,7 +19,9 @@ export async function createAndAuthenticateTest(app: FastifyInstance) {
 
 
     return {
-        token: res.body.token
+        token: res.body.token,
+        userId: user.body.id,
+        user: user.body
     }
 
 }
