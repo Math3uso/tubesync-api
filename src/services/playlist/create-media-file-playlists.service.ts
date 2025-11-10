@@ -1,6 +1,8 @@
 import { NotFoundExeption } from "@/@exceptions/default/not-found.exeption";
 import { IMediaFileRepository } from "@/repository/media-file/i-media-file-repository";
+import { MediaFileRepository } from "@/repository/media-file/media-file.repository";
 import { IPlaylist } from "@/repository/playlist/i-playlist";
+import { PlayListRepository } from "@/repository/playlist/playlist.respository";
 import { MediaFile } from "@prisma/client";
 
 interface CreateMediaFileRequest {
@@ -26,5 +28,9 @@ export class CreateMediaFilePlaylistService {
         return {
             newMediaFile
         }
+    }
+
+    static create() {
+        return new CreateMediaFilePlaylistService(new PlayListRepository(), new MediaFileRepository());
     }
 }
