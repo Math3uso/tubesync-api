@@ -16,4 +16,10 @@ export class SessionRepository implements ISessionRepository {
             where: { refrashToken: token }
         });
     }
+    async update(session: Session): Promise<Session | null> {
+        return await prisma.session.update({
+            where: { id: session.id },
+            data: session
+        });
+    }
 }
