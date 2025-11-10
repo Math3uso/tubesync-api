@@ -15,11 +15,17 @@ export class MediaFileRepository implements IMediaFileRepository {
         throw new Error();
     }
 
-    async addToPlaylist(id: string, playlistId: string): Promise<MediaFile | null> {
+    async addToPlaylist({ id, playlistId }: { id: string, playlistId: string }): Promise<MediaFile | null> {
         return await prisma.mediaFile.update({
             where: { id },
             data: { playlistId }
         })
+    }
+
+    async findAllByPlaylistId(playlistId: string): Promise<MediaFile[]> {
+        return await prisma.mediaFile.findMany({
+            where: { playlistId }
+        });
     }
 
 }

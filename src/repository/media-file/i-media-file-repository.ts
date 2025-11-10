@@ -5,4 +5,5 @@ export interface IMediaFileRepository {
     findById(id: string): Promise<MediaFile | null>;
     findByIdAndUserId(id: string, userId: string): Promise<MediaFile | null>;
     addToPlaylist({ id, playlistId }: { id: string, playlistId: string }): Promise<MediaFile | null>;
+    findAllByPlaylistId(playlistId: string): Promise<MediaFile[]>;
 }
