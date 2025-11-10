@@ -1,4 +1,5 @@
 import { IPlaylist } from "@/repository/playlist/i-playlist";
+import { PlayListRepository } from "@/repository/playlist/playlist.respository";
 
 interface CreatePlayListRequest {
     title: string;
@@ -17,5 +18,9 @@ export class CreatePlayListService {
         return {
             playlist
         }
+    }
+
+    static create() {
+        return new CreatePlayListService(new PlayListRepository);
     }
 }
