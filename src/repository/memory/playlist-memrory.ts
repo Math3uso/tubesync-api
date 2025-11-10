@@ -33,8 +33,4 @@ export class PlayListInMemory implements IPlaylist {
         return playlists;
     }
 
-    async findMediaFilesById(id: string): Promise<MediaFile[]> {
-        throw new Error("Method not implemented.");
-    }
-
 }
