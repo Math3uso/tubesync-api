@@ -17,7 +17,7 @@ export default defineConfig({
                 extends: true,
                 test: {
                     name: 'unit',
-                    dir: 'src/services/test'
+                    dir: 'src/services/_test'
                 }
             },
             {
