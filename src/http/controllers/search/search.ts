@@ -9,9 +9,13 @@ export async function searchController(request: FastifyRequest, reply: FastifyRe
 
     const { name } = querySchema.parse(request.query);
 
+    console.log("[INFO] QUERY = ", name);
+
     const { videoInfo } = await YTMedia.getListVideos({ name });
 
     const playList = await YTMedia.getPlaylists({ name, maxResult: 3 });
+
+    console.log("[INFO] total de videos: ", videoInfo.length);
 
     return reply.status(200).send({
         videoInfo,
