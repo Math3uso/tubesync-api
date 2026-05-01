@@ -47,9 +47,11 @@ app.register(fastifySwagger, {
     }
 });
 
-app.register(fastifySwaggerUI, {
-    routePrefix: '/docs'
-})
+if (env.NODE_ENV == "dev") {
+    app.register(fastifySwaggerUI, {
+        routePrefix: '/docs'
+    })
+}
 
 
 app.register(fastifyCookie)
