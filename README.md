@@ -1,6 +1,6 @@
 # TubeSync API 🎵
 
-## Este README está em desenvolvimento
+## Este README está em desenvolvimento.
 
 Uma API RESTful para busca e streaming de conteúdo do YouTube, com foco em música e vídeos. Desenvolvida com Fastify, TypeScript.
 
