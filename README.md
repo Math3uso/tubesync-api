@@ -1,4 +1,4 @@
-# TubeSync API 🎵
+# TubeSync API
 
 ## Este README está em desenvolvimento.
 
